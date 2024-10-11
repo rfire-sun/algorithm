@@ -1,5 +1,7 @@
 package org.example;
 
+import org.junit.Test;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -13,5 +15,25 @@ public class Main {
             // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
             System.out.println("i = " + i);
         }
+    }
+
+
+    @Test
+    public void test1(){
+
+        int[] prices = {2, 5, 7, 8};
+        int n = 4;
+
+        System.out.println(maxCakePrice(n, prices));
+
+    }
+
+    // 输入蛋糕价格列表 priceList ，求重量为 n 蛋糕的最高售价
+    int maxCakePrice(int n, int[] priceList) {
+        if (n <= 1) return priceList[n]; // 蛋糕重量 <= 1 时直接返回
+        int f_n = 0;
+        for (int i = 0; i < n; i++)      // 从 n 种组合种选择最高售价的组合作为 f(n)
+            f_n = Math.max(f_n, maxCakePrice(i, priceList) + priceList[n - i]);
+        return f_n;                      // 返回 f(n)
     }
 }
